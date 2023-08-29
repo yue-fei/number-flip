@@ -20,9 +20,9 @@ export class Flip {
     duration = .5,
     delay,
     easeFn = (pos => (pos /= .5) < 1
-                ? .5 * Math.pow(pos, 3)
-                : .5 * (Math.pow((pos - 2), 3) + 2)),
-    systemArr = [0,1,2,3,4,5,6,7,8,9],
+      ? .5 * Math.pow(pos, 3)
+      : .5 * (Math.pow((pos - 2), 3) + 2)),
+    systemArr = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9],
     direct = true,
     separator,
     seperateOnly = 0,
@@ -45,8 +45,8 @@ export class Flip {
     this.maxLenNum = maxLenNum
     this._initHTML(maxLenNum || _maxLenOf(this.from, this.to))
     if (to === undefined) return
-    if (delay) setTimeout(() => this.flipTo({to: this.to, direct}), delay * 1000)
-    else this.flipTo({to: this.to, direct})
+    if (delay) setTimeout(() => this.flipTo({ to: this.to, direct }), delay * 1000)
+    else this.flipTo({ to: this.to, direct })
   }
 
   _initHTML(digits) {
@@ -116,6 +116,13 @@ export class Flip {
         ? 'inline-block'
         : 'none'
     })
+
+    for (let i = 1; i < this.afterArr.length; i++) {
+      if (this.afterArr[i] === 0 && this.areAllElementsAfterZero(this.afterArr, i)) {
+        this.ctnrArr[i].style.display = 'none'
+      }
+    }
+
     const draw = per => {
       let temp = 0
       for (let d = this.ctnrArr.length - 1; d >= 0; d -= 1) {
@@ -150,5 +157,14 @@ export class Flip {
       draw(1)
     })
     requestAnimationFrame(tick)
+  }
+
+  areAllElementsAfterZero(arr, index) {
+    for (let i = index + 1; i < arr.length; i++) {
+      if (arr[i] !== 0) {
+        return false
+      }
+    }
+    return true
   }
 }

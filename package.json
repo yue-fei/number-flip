@@ -10,7 +10,8 @@
     "gelerator": "^2.1.2"
   },
   "devDependencies": {
-    "poi": "^12.0.0"
+    "poi": "^12.0.0",
+    "vue-template-compiler": "^2.0.0"
   },
   "scripts": {
     "build": "poi --prod number-flip.js --format umd --module-name NumberFlip",
